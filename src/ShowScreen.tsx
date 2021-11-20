@@ -3,6 +3,7 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Text,
+  View,
   Platform
 } from 'react-native';
 import { TextInput, Button } from 'react-native-paper';
@@ -48,17 +49,49 @@ console.log(data.data.task);
       console.error(e);
     }    
   }
+  async onPressDelete(){
+    try{
+//console.log("#onPressDelete");
+      const result = await client.mutate({
+        mutation: gql`   
+        mutation {
+          deleteTask(id: "${this.state.id}"){
+            id
+          }
+        }                 
+        `,
+      })
+console.log(result);
+      this.props.navigation.goBack();
+    } catch (e) {
+      console.error(e);
+    }
+  }  
   render(){
 //console.log("id=", this.state.id );
 console.log(this.state.item );
     return (
-      <KeyboardAvoidingView // (1)
-        style={styles.container}
-      >
+      <View style={styles.container}>
         <Text>Welcome, Show</Text>
         <Text>id: {this.state.id}</Text>
-        <Text>title: {this.state.item.title}</Text>
-      </KeyboardAvoidingView>
+        <Text style={{ marginBottom: 16 }}
+        >title: {this.state.item.title}</Text>
+        <Button
+        mode="contained"
+        style={{ marginBottom: 16 }}
+        onPress={() => {
+          this.props.navigation.navigate('EditScreen', {
+            id: this.state.id
+          });
+        }}        
+        >Edit
+        </Button>
+        <Button
+        mode="contained"
+        onPress={() => this.onPressDelete()}
+        >削除
+        </Button>
+      </View>
     )
   }
 };

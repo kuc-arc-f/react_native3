@@ -6,6 +6,8 @@ import { Provider as PaperProvider } from 'react-native-paper';
 import { MainScreen } from './src/MainScreen';
 import { ComposeScreen } from './src/ComposeScreen';
 import { ShowScreen } from './src/ShowScreen';
+import { EditScreen } from './src/EditScreen';
+
 
 const Stack = createStackNavigator();
 
@@ -34,7 +36,14 @@ export default function App() {
             options={{
               title: 'Show'
             }}
-          />          
+          />
+          <Stack.Screen
+            name="EditScreen"
+            component={EditScreen}
+            options={{
+              title: 'Edit'
+            }}
+          />                    
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
