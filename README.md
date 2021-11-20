@@ -43,6 +43,7 @@ uri: 'http://localhost:3000/graphql',
 ***
 ### blog
 
+https://zenn.dev/knaka0209/articles/b5c38fca016fe7
 
 ***
 
